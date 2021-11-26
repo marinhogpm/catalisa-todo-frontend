@@ -1,74 +1,107 @@
-import { Layout, Row, Col, Table, Modal } from "antd";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from 'react';
+import { Layout, Row, Col, Table, Modal, Button } from 'antd';
+import axios from 'axios';
 
-
-const { Content } = Layout
-const { Column } = Table
+const { Content } = Layout;
+const { Column } = Table;
 
 const TaskListPage = () => {
-    const [loading, setLoanding] = useState([])
-    const [tasks, setTasks] = useState(false)
+    const [tasks, setTasks] = useState([]);
+    const [loading, setLoading] = useState(false);
 
-    const requestTask = async () => {
+    const requestTasks = async () => {
         try {
+            setLoading(true);
 
-            setLoanding(true)
-            const response = await axios.get('/tarefas')
-            setTasks(response.data)
+            const response = await axios.get('/tarefas');
+            setTasks(response.data);
 
         } catch (error) {
             console.warn(error);
             Modal.error({
-                title: 'Não foi possivel carregar suas tarefas, tente novamente mais tarde'
-            })
+                title: 'Não foi possível carregar suas tarefas, tente novamente mais tarde.'
+            });
         } finally {
-            setLoanding(false)
+            setLoading(false);
         }
     };
+
     useEffect(() => {
-        requestTask();
+        requestTasks();
     }, []);
+
+    const completeTask = async (taskId) => {
+        try {
+            setLoading(true);
+
+            await axios.put('/tarefas/' + taskId + '/conclusao');
+
+            await requestTasks();
+        } catch (error) {
+            console.warn(error);
+            Modal.error({
+                title: 'Não foi possível concluir a tarefa, tente novamente mais tarde.'
+            });
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const renderCompleteTask = (concluida, task) => {
+        return (
+            <Button
+                onClick={() => {
+                    completeTask(task.id);
+                }}
+            >
+                {concluida ? '✅' : '❌'}
+            </Button>
+        );
+    };
 
     return (
         <Content>
             <Row gutter={[24, 24]} justify="center">
                 <Col span={23}>
+
                     <Table
                         dataSource={tasks}
                         pagination={false}
                         loading={loading}
                     >
-                        < Column
+                        <Column
                             title="ID"
                             dataIndex="id"
                             key="id"
                         />
-                        < Column
+                        <Column
                             title="Titulo"
                             dataIndex="titulo"
                             key="titulo"
                         />
-                        < Column
-                            title="Criado em"
+                        <Column
+                            title="Criada em"
                             dataIndex="data_criacao"
                             key="data_criacao"
                             render={dataCriacao => {
                                 return new Date(dataCriacao).toLocaleString();
                             }}
                         />
-                        < Column
-                            title="Concluida"
+                        <Column
+                            title="Concluída"
                             dataIndex="concluida"
                             key="concluida"
-                            render={concluida => {
-                                return concluida ? '✔' : '❌'
-                            }}
+                            render={renderCompleteTask}
                         />
                     </Table>
+
                 </Col>
             </Row>
         </Content>
     );
 }
+
 export default TaskListPage;
+
+
+
