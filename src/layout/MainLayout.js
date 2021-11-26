@@ -1,8 +1,5 @@
 import { Layout } from 'antd';
-import {
-  Routes, Route, Navigate
-} from 'react-router-dom';
-
+import {Routes, Route, Navigate} from 'react-router-dom';
 import PrivateRoute from '../components/PrivateRoute';
 import LoginPage from '../pages/LoginPage';
 import SubscriptionPage from '../pages/SubscriptionPage';

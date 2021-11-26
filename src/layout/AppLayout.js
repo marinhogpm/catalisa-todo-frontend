@@ -1,7 +1,6 @@
 import { Button, Col, Layout, Menu, Popconfirm, Row } from 'antd';
 import { useCallback, useMemo } from 'react';
 import { useNavigate, matchPath, useLocation } from 'react-router-dom';
-
 import Logo from '../assets/catalisa.png';
 import LocalStorageHelper from '../helpers/localstorage-helper';
 

@@ -1,12 +1,7 @@
-import {
-  Button, Card,
-  Col, Form, Layout, Row,
-  Typography, Modal
-} from 'antd';
+import { Button, Card,  Col, Form, Layout, Row, Typography, Modal} from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCallback, useState } from 'react';
 import axios from 'axios';
-
 import Logo from '../assets/catalisa.png';
 import InputText from '../components/InputText';
 import { validateEmail, validateName, validatePassword } from '../helpers/validation-helper';
@@ -15,8 +10,8 @@ const { Content } = Layout;
 const { Title } = Typography;
 
 const SubscriptionPage = () => {
-  const navigate = useNavigate();
-  const [formValues, setFormValues] = useState('')
+  const navigate = useNavigate();        
+  const [formValues, setFormValues] = useState("")
   const [loading, setLoading] = useState(false);
 
   const handleSubscription = useCallback(async () => {

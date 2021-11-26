@@ -1,6 +1,6 @@
 const TaskCreatePage = () => {
     return (
-        <div></div>
+        <div style={{ textAlign: 'center' }}>Novas Tarefas</div>
     );
 }
 
