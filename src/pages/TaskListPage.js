@@ -1,40 +1,31 @@
 import { Layout, Row, Col, Table } from "antd";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const { Content } = Layout
 const { Column } = Table
 
-const TASKS = [
-    {
-        "id": 2,
-        "titulo": "Lavar o carro",
-        "data_criacao": 1637009232863,
-        "concluida": 0,
-        "usuario_id": 1
-    },
-    {
-        "id": 3,
-        "titulo": "Arrumar a casa",
-        "data_criacao": 1637009243918,
-        "concluida": 0,
-        "usuario_id": 1
-    },
-    {
-        "id": 4,
-        "titulo": "Estudar para a prova",
-        "data_criacao": 1637009251042,
-        "concluida": 1,
-        "usuario_id": 1
-    },
-];
-
-
 const TaskListPage = () => {
+    const [tasks,setTasks] = useState([])
+    const requestTask = async () =>{
+        try{
+            const response = await axios.get('/tarefas')
+            setTasks(response.data)
+            console.log(response.data)
+        }catch (error){
+            console.warn(error);
+        }
+        };
+    useEffect(() => {
+        requestTask();
+    }, []);
+
     return (
         <Content>
             <Row gutter={[24, 24]} justify="center">
                 <Col span={23}>
                     <Table
-                        dataSource={TASKS}
+                        dataSource={tasks}
                         pagination={false}>
                         < Column
                             title="ID"
