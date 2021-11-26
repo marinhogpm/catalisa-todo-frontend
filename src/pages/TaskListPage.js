@@ -1,21 +1,31 @@
-import { Layout, Row, Col, Table } from "antd";
+import { Layout, Row, Col, Table, Modal } from "antd";
 import { useEffect, useState } from "react";
 import axios from "axios";
+
 
 const { Content } = Layout
 const { Column } = Table
 
 const TaskListPage = () => {
-    const [tasks,setTasks] = useState([])
-    const requestTask = async () =>{
-        try{
+    const [loading, setLoanding] = useState([])
+    const [tasks, setTasks] = useState(false)
+
+    const requestTask = async () => {
+        try {
+
+            setLoanding(true)
             const response = await axios.get('/tarefas')
             setTasks(response.data)
-            console.log(response.data)
-        }catch (error){
+
+        } catch (error) {
             console.warn(error);
+            Modal.error({
+                title: 'Não foi possivel carregar suas tarefas, tente novamente mais tarde'
+            })
+        } finally {
+            setLoanding(false)
         }
-        };
+    };
     useEffect(() => {
         requestTask();
     }, []);
@@ -26,7 +36,9 @@ const TaskListPage = () => {
                 <Col span={23}>
                     <Table
                         dataSource={tasks}
-                        pagination={false}>
+                        pagination={false}
+                        loading={loading}
+                    >
                         < Column
                             title="ID"
                             dataIndex="id"
@@ -41,7 +53,7 @@ const TaskListPage = () => {
                             title="Criado em"
                             dataIndex="data_criacao"
                             key="data_criacao"
-                            render={dataCriacao =>{
+                            render={dataCriacao => {
                                 return new Date(dataCriacao).toLocaleString();
                             }}
                         />
@@ -49,7 +61,7 @@ const TaskListPage = () => {
                             title="Concluida"
                             dataIndex="concluida"
                             key="concluida"
-                            render={concluida =>{
+                            render={concluida => {
                                 return concluida ? '✔' : '❌'
                             }}
                         />
