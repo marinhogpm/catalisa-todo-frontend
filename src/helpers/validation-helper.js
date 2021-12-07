@@ -1,4 +1,5 @@
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+const numeros = /^[0-9]*$/
 
 export const validateEmail = (text) => {
     return text && EMAIL_REGEX.test(text)
@@ -16,4 +17,16 @@ export const validateName = (text) => {
     return text?.length >= 1 && text?.length <= 200
         ? undefined
         : 'O nome deve possuir de 1 a 200 caracteres'
+};
+
+export const validateTask = (text) => {
+    return text?.length >= 1 && text?.length <= 500
+        ? undefined
+        : 'O nome deve possuir de 1 a 500 caracteres'
+};
+
+export const validateCategoriaId = (text) => {
+    return text && numeros.test(text)
+        ? undefined
+        : 'Informe apenas numeros'
 };

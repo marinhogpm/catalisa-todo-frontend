@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Layout, Row, Col, Table, Modal, Button } from 'antd';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const { Content } = Layout;
 const { Column } = Table;
@@ -78,7 +79,7 @@ const TaskListPage = () => {
                             title="Titulo"
                             dataIndex="titulo"
                             key="titulo"
-                        />
+                        /> 
                         <Column
                             title="Criada em"
                             dataIndex="data_criacao"
@@ -86,15 +87,20 @@ const TaskListPage = () => {
                             render={dataCriacao => {
                                 return new Date(dataCriacao).toLocaleString();
                             }}
-                        />
+                        /> 
+                      
                         <Column
                             title="Concluída"
                             dataIndex="concluida"
                             key="concluida"
                             render={renderCompleteTask}
                         />
+                        
+                        
                     </Table>
-
+                    <Link to="/tasks/new" className="ant-btn ant-btn-link ant-btn-lg ant-btn-block">
+                     Criar tarefas
+                  </Link>   
                 </Col>
             </Row>
         </Content>
