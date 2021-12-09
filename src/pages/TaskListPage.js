@@ -100,12 +100,7 @@ const TaskListPage = () => {
                             key="concluida"
                             render={renderCompleteTask}
                         />
-                        
-                        
                     </Table>
-                    <Link to="/tasks/new" className="ant-btn ant-btn-link ant-btn-lg ant-btn-block">
-                     Criar tarefas
-                  </Link>   
                 </Col>
             </Row>
         </Content>

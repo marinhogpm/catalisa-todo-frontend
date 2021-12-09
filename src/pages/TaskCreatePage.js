@@ -116,12 +116,6 @@ const TaskCreatePage = () => {
               </Button>
             </Form>
           </Card>
-          <Link
-            to="/tasks"
-            className="ant-btn ant-btn-link ant-btn-lg ant-btn-block"
-          >
-            Ver minhas tarefas
-          </Link>
         </Col>
       </Row>
     </Content>

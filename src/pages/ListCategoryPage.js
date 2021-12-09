@@ -46,12 +46,6 @@ const ListCategoryPage = () => {
               }}
             />
           </Table>
-          <Link
-            to="/categoria/new"
-            className="ant-btn ant-btn-link ant-btn-lg ant-btn-block"
-          >
-            Criar categoriass
-          </Link>
         </Col>
       </Row>
     </Content>

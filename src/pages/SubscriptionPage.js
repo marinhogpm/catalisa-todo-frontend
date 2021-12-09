@@ -131,7 +131,6 @@ const SubscriptionPage = () => {
               >
                 Cadastrar
               </Button>
-
               <Link
                 to="/login"
                 className="ant-btn ant-btn-link ant-btn-lg ant-btn-block"

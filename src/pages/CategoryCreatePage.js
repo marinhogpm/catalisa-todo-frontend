@@ -93,12 +93,6 @@ const CategoryCreatePage = () => {
               </Button>
             </Form>
           </Card>
-          <Link
-            to="/categoria"
-            className="ant-btn ant-btn-link ant-btn-lg ant-btn-block"
-          >
-            Ver minhas categorias
-          </Link>
         </Col>
       </Row>
     </Content>
