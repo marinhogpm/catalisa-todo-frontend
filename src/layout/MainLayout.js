@@ -6,7 +6,8 @@ import SubscriptionPage from '../pages/SubscriptionPage';
 import TaskCreatePage from '../pages/TaskCreatePage';
 import TaskListPage from '../pages/TaskListPage';
 import AppLayout from './AppLayout';
-import ListCategory from '../pages/ListCategory';
+import ListCategoryPage from '../pages/ListCategoryPage';
+import CategoryCreatePage from '../pages/CategoryCreatePage';
 
 const MainLayout = () => {
   return (
@@ -31,7 +32,14 @@ const MainLayout = () => {
         <Route path="/categoria" element={
           <PrivateRoute>
             <AppLayout>
-              <ListCategory />
+              <ListCategoryPage />
+            </AppLayout>
+          </PrivateRoute>
+        } />
+        <Route path="/categoria/new" element={
+          <PrivateRoute>
+            <AppLayout>
+              <CategoryCreatePage />
             </AppLayout>
           </PrivateRoute>
         } />

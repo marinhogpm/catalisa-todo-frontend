@@ -80,6 +80,11 @@ const TaskListPage = () => {
                             dataIndex="titulo"
                             key="titulo"
                         /> 
+                         <Column
+                            title="Categoria"
+                            dataIndex={["categoria", "nome"]}
+                            key="categoria"
+                        /> 
                         <Column
                             title="Criada em"
                             dataIndex="data_criacao"
@@ -108,6 +113,3 @@ const TaskListPage = () => {
 }
 
 export default TaskListPage;
-
-
-

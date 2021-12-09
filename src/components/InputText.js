@@ -10,10 +10,9 @@ const InputText = (props) => {
   const validateStatus = errorMessage ? 'error' : 'success';
 
   const handleValidation = (event) => {
-    const { name, value } = event.target;
+    const { name, value , checked} = event.target;
     setChanged(true);
     let isValid = true;
-
     if (validate) {
       const message = validate(value);
       setErrorMessage(message);
@@ -24,7 +23,8 @@ const InputText = (props) => {
       onChange({
         target: {
           name,
-          value: isValid ? value : null
+          value: isValid ? value : null,
+          checked: checked
         }
       });
     }

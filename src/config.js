@@ -1,9 +1,9 @@
-import 'antd/dist/antd.css';
-import axios from 'axios';
-import localStorageHelper from './helpers/localstorage-helper';
+import "antd/dist/antd.css";
+import axios from "axios";
+import localStorageHelper from "./helpers/localstorage-helper";
 
-axios.defaults.baseURL = 'http://localhost:3001';
-axios.interceptors.request.use((request) =>{
-    request.headers.token = localStorageHelper.getToken();
-    return request;
+axios.defaults.baseURL = "http://localhost:3001";
+axios.interceptors.request.use((request) => {
+  request.headers.token = localStorageHelper.getToken();
+  return request;
 });

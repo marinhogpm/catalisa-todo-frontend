@@ -1,23 +1,27 @@
-import { Button, Col, Layout, Menu, Popconfirm, Row } from 'antd';
-import { useCallback, useMemo } from 'react';
-import { useNavigate, matchPath, useLocation } from 'react-router-dom';
-import Logo from '../assets/catalisa.png';
-import LocalStorageHelper from '../helpers/localstorage-helper';
+import { Button, Col, Layout, Menu, Popconfirm, Row } from "antd";
+import { useCallback, useMemo } from "react";
+import { useNavigate, matchPath, useLocation } from "react-router-dom";
+import Logo from "../assets/catalisa.png";
+import LocalStorageHelper from "../helpers/localstorage-helper";
 
 const { Header, Footer } = Layout;
 
 const MENU_ITEMS = [
   {
-    path: '/tasks',
-    label: 'Minhas tarefas',
+    path: "/tasks",
+    label: "Minhas tarefas",
   },
   {
-    path: '/tasks/new',
-    label: 'Nova tarefa',
+    path: "/tasks/new",
+    label: "Nova tarefa",
   },
   {
-    path: '/categoria',
-    label: 'Minhas categorias',
+    path: "/categoria",
+    label: "Minhas categorias",
+  },
+  {
+    path: "/categoria/new",
+    label: "Nova categorias",
   },
 ];
 
@@ -26,7 +30,7 @@ const AppLayout = ({ children }) => {
   const navigate = useNavigate();
 
   const selectedKeys = useMemo(() => {
-    const cuerrentRoute = MENU_ITEMS.find(item => {
+    const cuerrentRoute = MENU_ITEMS.find((item) => {
       return matchPath(item.path, location.pathname);
     });
 
@@ -50,16 +54,16 @@ const AppLayout = ({ children }) => {
 
   const handleLogout = useCallback(() => {
     LocalStorageHelper.removeToken();
-    navigate('/login');
+    navigate("/login");
   }, [navigate]);
 
   return (
     <div>
       <Header
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          flexWrap: 'nowrap',
+          display: "flex",
+          alignItems: "center",
+          flexWrap: "nowrap",
         }}
       >
         <img
@@ -67,14 +71,14 @@ const AppLayout = ({ children }) => {
           style={{
             height: 40,
             marginLeft: 16,
-            marginRight: 16
+            marginRight: 16,
           }}
           alt="Catalisa Tech"
         />
 
         <Menu
           style={{
-            flex: 1
+            flex: 1,
           }}
           selectedKeys={selectedKeys}
           mode="horizontal"
@@ -91,10 +95,7 @@ const AppLayout = ({ children }) => {
           title="Deseja sair do sistema?"
           placement="leftTop"
         >
-          <Button
-            type="text"
-            danger
-          >
+          <Button type="text" danger>
             Sair
           </Button>
         </Popconfirm>
@@ -104,13 +105,11 @@ const AppLayout = ({ children }) => {
 
       <Footer>
         <Row justify="center">
-          <Col>
-            Catalisa Bootcamp Tech ©2021
-          </Col>
+          <Col>Catalisa Bootcamp Tech ©2021</Col>
         </Row>
       </Footer>
-    </div >
+    </div>
   );
-}
+};
 
 export default AppLayout;

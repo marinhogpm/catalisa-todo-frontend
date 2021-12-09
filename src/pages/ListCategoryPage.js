@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Layout, Row, Col, Table, Modal, Button } from "antd";
+import { Layout, Row, Col, Table, Modal } from "antd";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const { Content } = Layout;
 const { Column } = Table;
 
-const ListCategory = () => {
+const ListCategoryPage = () => {
   const [categoria, setCategoria] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -36,12 +37,25 @@ const ListCategory = () => {
           <Table dataSource={categoria} pagination={false} loading={loading}>
             <Column title="Id" dataIndex="id" key="id" />
             <Column title="Categoria" dataIndex="nome" key="nome" />
-            <Column title="Criada em" dataIndex="data_criacao" key="data_criacao" render={(dataCriacao) => {return new Date(dataCriacao).toLocaleString();}}/>
+            <Column
+              title="Criada em"
+              dataIndex="data_criacao"
+              key="data_criacao"
+              render={(dataCriacao) => {
+                return new Date(dataCriacao).toLocaleString();
+              }}
+            />
           </Table>
+          <Link
+            to="/categoria/new"
+            className="ant-btn ant-btn-link ant-btn-lg ant-btn-block"
+          >
+            Criar categoriass
+          </Link>
         </Col>
       </Row>
     </Content>
   );
 };
 
-export default ListCategory;
+export default ListCategoryPage;

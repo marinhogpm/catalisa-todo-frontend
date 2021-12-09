@@ -3,37 +3,34 @@ import { Link, useNavigate } from "react-router-dom";
 import { useCallback, useState } from "react";
 import axios from "axios";
 import InputText from "../components/InputText";
-import { validateTask } from "../helpers/validation-helper";
+import { validateCategory } from "../helpers/validation-helper";
 
 const { Content } = Layout;
 const { Title } = Typography;
 
-const TaskCreatePage = () => {
+const CategoryCreatePage = () => {
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const createTask = useCallback(async () => {
+  const createCategory = useCallback(async () => {
     try {
       setLoading(true);
 
-      const { titulo, concluida, categoria_id } = formValues;
+      const { nome } = formValues;
 
-      if (!titulo || !categoria_id) return;
+      if (!nome) return;
 
       const body = {
-        titulo: titulo,
-        concluida: concluida,
-        categoria_id: categoria_id,
+        nome: nome,
       };
 
-      await axios.post("/tarefas", body);
+      await axios.post("/categoria", body);
 
       Modal.success({
         title: "Cadastro realizado com sucesso.",
       });
 
-      navigate("/tasks/new");
+      navigate("/categoria/new");
     } catch (error) {
       console.warn(error);
       const { response } = error;
@@ -44,14 +41,13 @@ const TaskCreatePage = () => {
       } else {
         Modal.error({
           title:
-            "Não foi possivel cadastrar a tarefa, tente novamente mais tarde.",
+            "Não foi possivel cadastrar a categoria, tente novamente mais tarde.",
         });
       }
     } finally {
       setLoading(false);
     }
-  }, [formValues, navigate]);
-
+  }, [formValues]);
   const handleInputChange = useCallback(
     (event) => {
       const { name, value, checked } = event.target;
@@ -63,45 +59,26 @@ const TaskCreatePage = () => {
     },
     [formValues]
   );
-
   return (
     <Content>
       <Row justify="center">
         <Col xs={24} sl={14} md={12} lg={10} xl={8}>
           <Card style={{ margin: 24 }}>
             <div style={{ textAlign: "center" }}></div>
-
-            <Title
-              level={3}
-              type="secondary"
-              style={{ textAlign: "center", marginTop: 8 }}
-            >
-              Cadastre sua Tarefa
-            </Title>
-
             <Form layout="vertical">
+              <Title
+                level={3}
+                type="secondary"
+                style={{ textAlign: "center", marginTop: 8 }}
+              >
+                Cadastre sua Categoria
+              </Title>
               <InputText
-                name="titulo"
-                label="Titulo"
+                name="nome"
+                label="Nome da Categoria"
                 size="large"
                 onChange={handleInputChange}
-                validate={validateTask}
-                disabled={loading}
-                required
-              />
-              <InputText
-                name="categoria_id"
-                label="ID da Categoria"
-                size="large"
-                onChange={handleInputChange}
-                disabled={loading}
-              />
-              <InputText
-                name="concluida"
-                label="Concluida"
-                type="checkbox"
-                size="large"
-                onChange={handleInputChange}
+                validate={validateCategory}
                 disabled={loading}
                 required
               />
@@ -109,7 +86,7 @@ const TaskCreatePage = () => {
                 block
                 type="primary"
                 size="large"
-                onClick={createTask}
+                onClick={createCategory}
                 loading={loading}
               >
                 Cadastrar
@@ -117,10 +94,10 @@ const TaskCreatePage = () => {
             </Form>
           </Card>
           <Link
-            to="/tasks"
+            to="/categoria"
             className="ant-btn ant-btn-link ant-btn-lg ant-btn-block"
           >
-            Ver minhas tarefas
+            Ver minhas categorias
           </Link>
         </Col>
       </Row>
@@ -128,4 +105,4 @@ const TaskCreatePage = () => {
   );
 };
 
-export default TaskCreatePage;
+export default CategoryCreatePage;
